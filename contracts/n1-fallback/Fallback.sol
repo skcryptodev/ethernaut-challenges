@@ -3,7 +3,7 @@ pragma solidity ^0.6.0;
 
 import "@openzeppelin/contracts/math/SafeMath.sol";
 
-contract FallbackVictim {
+contract Fallback {
 
   using SafeMath for uint256;
   mapping(address => uint) public contributions;

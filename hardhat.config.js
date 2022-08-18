@@ -2,11 +2,13 @@ require("@nomicfoundation/hardhat-toolbox");
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
-  //solidity: "0.8.9",
-  solidity: {
-    compilers: [
-      {version: "0.8.9"},
-      {version: "0.6.6"}
-    ]
+  solidity: "0.6.6",
+  networks: {
+    hardhat: {
+      mining: {
+        auto: false,
+        interval: 3000
+      }
+    }
   }
 };
