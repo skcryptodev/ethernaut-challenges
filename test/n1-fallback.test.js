@@ -74,7 +74,7 @@ describe("Challenge 1 - Fallback", function() {
 
             expect(await vulnerableContract.owner()).is.equal(maliciousUser.address)
             await expect(vulnerableContract.withdraw()).to.be.revertedWith("caller is not the owner")
-            //await expect(vulnerableContract.connect(maliciousUser).withdraw()).not.to.be.reverted
+            await expect(vulnerableContract.connect(maliciousUser).withdraw()).not.to.be.reverted
         })
     })
 })

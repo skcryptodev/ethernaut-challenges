@@ -2,7 +2,7 @@
 pragma solidity ^0.6.0;
 
 import "@openzeppelin/contracts/math/SafeMath.sol";
-import './Coinflip.sol';
+import "./Coinflip.sol";
 
 contract N3Attacker {
     using SafeMath for uint256;
