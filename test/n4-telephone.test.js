@@ -2,7 +2,7 @@ const {ethers} = require("hardhat")
 const {expect} = require("chai")
 const {loadFixture} = require("@nomicfoundation/hardhat-network-helpers")
 
-describe.only("Challenge 4 - Telephone", function() {
+describe("Challenge 4 - Telephone", function() {
 
     async function deployContractsFixture() {
         const [deployer, maliciousUser] = await ethers.getSigners()
