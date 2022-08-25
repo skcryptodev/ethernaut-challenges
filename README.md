@@ -1,1 +1,1 @@
-Ethernaut challenges with Mocha and Chai
+Ethernaut challenges with Mocha and Chai.
