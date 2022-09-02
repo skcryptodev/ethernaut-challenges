@@ -2,7 +2,7 @@ const {ethers} = require("hardhat")
 const {expect} = require("chai")
 const {loadFixture} = require("@nomicfoundation/hardhat-network-helpers")
 
-describe.only("Challenge 6 - Delegation", function() {
+describe("Challenge 6 - Delegation", function() {
 
     async function deployContractsFixture() {
         const [deployer, maliciousUser] = await ethers.getSigners()
@@ -37,8 +37,6 @@ describe.only("Challenge 6 - Delegation", function() {
     
             const tx = await maliciousContract.connect(maliciousUser).attack()
             const tx_receipt = await tx.wait()
-
-            console.log(tx_receipt)
 
             expect(await vulnerableContract.owner()).is.equal(maliciousContract.address)
         })
