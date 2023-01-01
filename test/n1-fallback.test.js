@@ -12,8 +12,6 @@ describe("Challenge 1 - Fallback", function() {
         const vulnerableContract = await Fallback.deploy()
         await vulnerableContract.deployed()
 
-        console.log(`contract deployed to ${vulnerableContract.address}`)
-
         return {initialVictimFunds, deployer, regularUser, maliciousUser, vulnerableContract}
     }
 
