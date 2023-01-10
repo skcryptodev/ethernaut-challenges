@@ -6,7 +6,16 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
-  solidity: "0.6.6",
+  solidity: {
+    compilers: [
+      {
+        version: "0.6.6",
+      },
+      {
+        version: "0.8.0",
+      },
+    ],
+  },
   networks: {
     localhost: {
       url: `${RPC_URL}`,

@@ -3,7 +3,7 @@ const { expect } = require("chai")
 const { loadFixture } = require("@nomicfoundation/hardhat-network-helpers")
 const { utils } = require("mocha")
 
-describe.only("Challenge 7 - Force", function () {
+describe("Challenge 7 - Force", function () {
     const amountToFund = "1"
     async function initialStateFixture() {
         const [deployer, addr1] = await ethers.getSigners()

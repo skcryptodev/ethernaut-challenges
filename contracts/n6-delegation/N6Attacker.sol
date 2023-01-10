@@ -1,12 +1,12 @@
 //SPDX-License-Identifier:MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.0;
 
 import "./Delegation.sol";
 
 contract N6Attacker{
     Delegation public delegation;
 
-    constructor(address _delegation) public {
+    constructor(address _delegation) {
         delegation = Delegation(_delegation);
     }
 
