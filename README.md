@@ -17,5 +17,6 @@ If that command is not ran, you might see an error like this
 
 ## Run puzzle solutions
 ```
-npx hardhat test
+cd ethernaut-challenges
+npx hardhat test --network localhost
 ```

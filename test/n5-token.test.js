@@ -6,7 +6,7 @@ describe("Challenge 5 - Token", function() {
     const initialTokenSupply = "21000000"
     const initialUserSupply = "20"
 
-    async function deployContractFixture() {
+    async function initialStateFixture() {
         const [deployer, maliciousUser, maliciousUser2] = await ethers.getSigners()
         const Token = await ethers.getContractFactory("Token")
         const vulnerableContract = await Token.deploy(ethers.utils.parseEther(initialTokenSupply))
@@ -23,20 +23,20 @@ describe("Challenge 5 - Token", function() {
 
     describe("Initial State", function() {
         it("Should deploy contract with correct deployer", async function() {
-            const {deployer, vulnerableContract} = await loadFixture(deployContractFixture)
+            const {deployer, vulnerableContract} = await loadFixture(initialStateFixture)
 
             expect(vulnerableContract.deployTransaction.from).to.equal(deployer.address)
         })
 
         it("Should set correct deployer token amount", async function() {
-            const {deployer, vulnerableContract} = await loadFixture(deployContractFixture)
+            const {deployer, vulnerableContract} = await loadFixture(initialStateFixture)
 
             expect(await vulnerableContract.balanceOf(deployer.address)).to.equal(
                 ethers.utils.parseEther(initialTokenSupply).sub(ethers.utils.parseEther(initialUserSupply)))
         })
 
         it("Should set correct attacker token amount", async function() {
-            const {maliciousUser, vulnerableContract} = await loadFixture(deployContractFixture)
+            const {maliciousUser, vulnerableContract} = await loadFixture(initialStateFixture)
 
             expect(await vulnerableContract.balanceOf(maliciousUser.address)).to.equal(
                 ethers.utils.parseEther(initialUserSupply))
@@ -45,7 +45,7 @@ describe("Challenge 5 - Token", function() {
 
     describe("Attack Execution", function() {
         it("Should increase attacker balance", async function() {
-            const {maliciousUser, maliciousUser2, vulnerableContract} = await loadFixture(deployContractFixture)
+            const {maliciousUser, maliciousUser2, vulnerableContract} = await loadFixture(initialStateFixture)
 
             //transfer malicious user's total balacnce plus some extra value;
             //This will cause an underflow and malucious user's value will be around 2^256-1

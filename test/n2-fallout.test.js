@@ -4,7 +4,7 @@ const {ethers} = require("hardhat")
 
 describe("Challenge 2 - Fallout", function() {
 
-    async function deployContractFixture() {
+    async function initialStateFixture() {
         const [deployer, maliciousUser] = await ethers.getSigners()
 
         const Fallout = await ethers.getContractFactory("Fallout")
@@ -16,13 +16,13 @@ describe("Challenge 2 - Fallout", function() {
 
     describe("Initial State", function() {
         it("Should deploy with deployer address as deployer", async function() {
-            const {deployer, vulnerableContract} = await loadFixture(deployContractFixture)
+            const {deployer, vulnerableContract} = await loadFixture(initialStateFixture)
 
             expect(await vulnerableContract.deployTransaction.from).to.equal(deployer.address)
         })
 
         it("Should deploy with owner address as 0x0", async function() {
-            const {deployer, vulnerableContract} = await loadFixture(deployContractFixture)
+            const {deployer, vulnerableContract} = await loadFixture(initialStateFixture)
 
             expect(await vulnerableContract.owner()).to.equal("0x0000000000000000000000000000000000000000")
         })
@@ -30,7 +30,7 @@ describe("Challenge 2 - Fallout", function() {
 
     describe("Attack Execution", function() {
         it("Should change owner to attacker", async function() {
-            const {maliciousUser, vulnerableContract} = await loadFixture(deployContractFixture)
+            const {maliciousUser, vulnerableContract} = await loadFixture(initialStateFixture)
             const tx = await vulnerableContract.connect(maliciousUser).Fal1out()
             await tx.wait()
 
