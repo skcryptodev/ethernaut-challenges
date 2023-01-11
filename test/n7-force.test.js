@@ -1,7 +1,6 @@
 const { ethers, network } = require("hardhat")
 const { expect } = require("chai")
 const { loadFixture } = require("@nomicfoundation/hardhat-network-helpers")
-const { utils } = require("mocha")
 
 describe("Challenge 7 - Force", function () {
     const amountToFund = "1"
