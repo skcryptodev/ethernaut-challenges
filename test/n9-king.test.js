@@ -2,9 +2,9 @@ const { ethers } = require("hardhat")
 const { expect } = require("chai")
 const { loadFixture } = require("@nomicfoundation/hardhat-network-helpers")
 
-describe.only("Challenge 9 - King", function () {
+describe("Challenge 9 - King", function () {
     async function initialStateFixture() {
-        const [deployer, maliciousUser, regularUser] = await ethers.getSigners()
+        const [deployer, regularUser, maliciousUser] = await ethers.getSigners()
 
         const King = await ethers.getContractFactory("King")
         const targetContract = await King.deploy()
@@ -56,7 +56,7 @@ describe.only("Challenge 9 - King", function () {
             )
             await txnResponse.wait();
 
-            //regular unsuspecting user tries to become king
+            //regular, unsuspecting user tries to become king
 
             /*
                 ERROR:
